@@ -1,0 +1,18 @@
+CREATE TABLE Person (ID int(12) NOT NULL AUTO_INCREMENT, lastFourSocial int(4) NOT NULL, birthday int(8) NOT NULL, personName varchar(255) NOT NULL, PRIMARY KEY (ID));
+CREATE TABLE UserAccount (accountNumber int(12) NOT NULL, deliveryPreference varchar(255), PRIMARY KEY (accountNumber));
+CREATE TABLE ClientAccount (accountNumber int(12) NOT NULL, clientOrgName varchar(255), PRIMARY KEY (accountNumber));
+CREATE TABLE AdminAccount (accountNumber int(12) NOT NULL, employeeId int(12), PRIMARY KEY (accountNumber));
+CREATE TABLE Document (userAccountNumber int(12) NOT NULL, bulkDocumentId int(12) NOT NULL, pageText varchar(255), PRIMARY KEY (userAccountNumber, bulkDocumentId));
+CREATE TABLE BulkDocument (bulkDocumentId int(12) NOT NULL AUTO_INCREMENT, clientAccountNumber int(12) NOT NULL, retentionTime int(11), deliverDate int(11), PRIMARY KEY (bulkDocumentId));
+CREATE TABLE Event (timeStamp varchar(255) NOT NULL, accountNumber int(12) NOT NULL, activity varchar(255), PRIMARY KEY (timeStamp, accountNumber));
+CREATE TABLE Address (userAccountNumber int(12) NOT NULL, street varchar(255), city varchar(255), zipCode int(9), country varchar(255), PRIMARY KEY (userAccountNumber));
+CREATE TABLE Account (accountNumber int(12) NOT NULL AUTO_INCREMENT, PersonID int(12) NOT NULL, email varchar(255) NOT NULL, password varchar(255) NOT NULL, PRIMARY KEY (accountNumber));
+ALTER TABLE Document ADD CONSTRAINT FKDocument803835 FOREIGN KEY (bulkDocumentId) REFERENCES BulkDocument (bulkDocumentId);
+ALTER TABLE ClientAccount ADD CONSTRAINT FKClientAcco162074 FOREIGN KEY (accountNumber) REFERENCES Account (accountNumber);
+ALTER TABLE AdminAccount ADD CONSTRAINT FKAdminAccou475274 FOREIGN KEY (accountNumber) REFERENCES Account (accountNumber);
+ALTER TABLE UserAccount ADD CONSTRAINT FKUserAccoun394055 FOREIGN KEY (accountNumber) REFERENCES Account (accountNumber);
+ALTER TABLE Address ADD CONSTRAINT FKAddress521542 FOREIGN KEY (userAccountNumber) REFERENCES UserAccount (accountNumber);
+ALTER TABLE Account ADD CONSTRAINT FKAccount705955 FOREIGN KEY (PersonID) REFERENCES Person (ID);
+ALTER TABLE Event ADD CONSTRAINT FKEvent738504 FOREIGN KEY (accountNumber) REFERENCES Account (accountNumber);
+ALTER TABLE BulkDocument ADD CONSTRAINT FKBulkDocume277585 FOREIGN KEY (clientAccountNumber) REFERENCES ClientAccount (accountNumber);
+ALTER TABLE Document ADD CONSTRAINT FKDocument925702 FOREIGN KEY (userAccountNumber) REFERENCES UserAccount (accountNumber);
