@@ -1,6 +1,5 @@
 # Homework 4 : Database
-ORM: Django
-Database: MySQL
+ORM: Django, Database: MySQL
 
 ```
 docInc/
