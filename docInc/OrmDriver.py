@@ -18,14 +18,14 @@ def create_people():
         lastfoursocial = 1112
     )
 
-    print(new_person.id)
-    print(new_person2.id)
+    print(f"Created ID: {new_person.id}")
+    print(f"Created ID: {new_person2.id}")
 
 def read_people():
     try:
-        Person.objects.get(id=2)
+        Person.objects.get(personname = "Gary Smith")
     except Person.DoesNotExist:
-        print("Person with id 2 was not found")
+        print("Person with name Gary Smith was not found")
     
     people = Person.objects.all()
     for person in people:
@@ -36,13 +36,13 @@ def update_people():
     people_named_Gary.update(birthday = 12121998)
 
 def delete_person():
-    person = Person.objects.get(id=2)
+    person = Person.objects.get(personname = "John Smith")
     person.delete()
 
     try:
-        Person.objects.get(id=2)
+        Person.objects.get(personname = "John Smith")
     except Person.DoesNotExist:
-        print("Person with id 2 was deleted")
+        print("Person with name John Smith was deleted")
 
 def clear_table():
     Person.objects.all().delete()
@@ -50,13 +50,18 @@ def clear_table():
 if __name__ == '__main__':
     print("Clearing table.")
     clear_table()
+    input("Press enter to continue.\n>")
 
     print("Creating 2 entries.")
     create_people()
     input("Press enter to continue.\n>")
 
-    print("Updating 1 entry.")
+    print("Reading entries.")
     read_people()
+    input("Press enter to continue.\n>")
+
+    print("Updating 1 entry.")
+    update_people()
     input("Press enter to continue.\n>")
 
     print("Deleting 1 entry.")
